@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header {
+  background-size: 100px;
+  background-image: url(../public/img/nasa-Q1p7bh3SHj8-unsplash.jpg);
+}
+
+h1 {
+  color: aliceblue;
+}
+
+body {
+  background-color: aqua;
+}
