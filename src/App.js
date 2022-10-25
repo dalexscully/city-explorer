@@ -79,7 +79,7 @@ class App extends React.Component {
               <p id='lat'>{this.state.cityData.lat}</p>
               <p id='lon'> {this.state.cityData.lon}</p>
               {this.state.cityData.display_name && 
-              <img id="map" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
+              <img id="map" alt='location Map'src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
             </div>
         }
       </>
