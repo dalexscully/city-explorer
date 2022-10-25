@@ -13,15 +13,14 @@ class CityForm extends React.Component {
   render() {
     return (
       <>
-        <Form onSubmit={this.getCityData}>
+        <Form onSubmit={this.props.getCityData}>
           <label > Locate a City
-            <input type="text" onInput={this.handleInput} />
+            <input type="text" onInput={this.props.handleInput} />
             <Button type="submit">Explore!</Button>
           </label>
-
         </Form>
-      
       </>
+      
     );
   }
 }
