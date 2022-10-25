@@ -15,36 +15,37 @@ class App extends React.Component {
       city: '',
       cityData: [],
       error: false,
-      citylat: '',
-      cityLon: '',
+      lat: '',
+      lon: '',
       errorMessage: '',
       img: ''
     }
   }
 
 
-  handleInput = (event) => {
-    event.preventDefault();
+  handleInput = (e) => {
+    e.preventDefault();
     this.setState({
-      city: event.target.value
+      city: e.target.value
     })
   }
 
-  getCityData = async (event) => {
-    event.preventDefault();
+  getCityData = async (e) => {
+    e.preventDefault();
     console.log(this.state.city);
 
     try {
 
-      let url = `https://us1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&q=${this.state.city}New York&format=json`
+      let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&q=${this.state.city}&format=json`
 
-      let cityData = await axios.get(url)
+      let cityData = await axios.get(url);
 
-      console.log(cityData.data[0]);
+      // console.log(cityData.datals[0]);
       this.setState({
         cityData: cityData.data[0],
-        longitude: cityData.data[0].lon,
-        latitude: cityData.data[0].lat
+        error: false,
+        lon: cityData.data[0].lon,
+        lat: cityData.data[0].lat,
       });
 
       console.log(this.state)
@@ -58,18 +59,32 @@ class App extends React.Component {
     }
 
   }
-        
-render() {
-  
-  return (
-    <>
-      <Header />
-      <CityForm />
-      <Main />
-      <Footer />
-    </>
-  )
-}
+
+  render() {
+    return (
+      <>
+      
+        <Header />
+        <CityForm getCityData={this.getCityData} handleInput={this.handleInput}/>
+        <Main />
+        <Footer />
+      
+        {
+          this.state.error
+            ?
+            <p>{this.state.errorMessage}</p>
+            :
+            <div>
+              <p id='title'>{this.state.cityData.display_name}</p>
+              <p id='lat'>{this.state.cityData.lat}</p>
+              <p id='lon'> {this.state.cityData.lon}</p>
+              {this.state.cityData.display_name && 
+              <img id="map" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
+            </div>
+        }
+      </>
+    )
+  }
 
 }
 

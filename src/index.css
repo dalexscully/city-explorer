@@ -24,3 +24,14 @@ h1 {
 body {
   background-color: aqua;
 }
+
+#map {
+  border-style: none;
+  border-radius: 20px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  color: black;
+}
