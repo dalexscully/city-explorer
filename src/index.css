@@ -1,5 +1,8 @@
 body {
-  margin: 0;
+  width: max-content;
+  margin: auto;
+  background-color: rgb(170, 187, 187);
+  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,26 +15,27 @@ code {
     monospace;
 }
 
-header {
-  background-size: 100px;
+#item {
+  color: white;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 600px 500px;
   background-image: url(../public/img/nasa-Q1p7bh3SHj8-unsplash.jpg);
 }
 
 h1 {
-  color: aliceblue;
-}
-
-body {
-  background-color: aqua;
+  color: white;
+  text-align: center;  
 }
 
 #map {
+  margin: auto;
   border-style: none;
   border-radius: 20px;
 }
 
 #footer {
-  position: fixed;
+  align-items: center;
   bottom: 0;
   color: black;
 }
