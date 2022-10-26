@@ -18,8 +18,10 @@ class App extends React.Component {
       lat: '',
       lon: '',
       errorMessage: '',
-      img: '',
-      weatherData: [],
+      weather: [],
+      img: ''
+
+      
     }
   }
 
@@ -40,16 +42,19 @@ class App extends React.Component {
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&q=${this.state.city}&format=json`
 
       let cityData = await axios.get(url);
-
+      let showData = cityData.data[0];
       // console.log(cityData.datals[0]);
       this.setState({
-        cityData: cityData.data[0],
+        cityData: showData,
         error: false,
         lon: cityData.data[0].lon,
         lat: cityData.data[0].lat,
       });
+      this.getWeatherData(showData);
 
       console.log(this.state)
+
+
 
     } catch (error) {
       console.log(error);
@@ -61,32 +66,37 @@ class App extends React.Component {
 
   }
 
-  getWeatherData = async () => {
-    
-    // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER AND GET PET DATA
-    
-      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.cityName}`;
+  // TODO: get weather dataf from our own backend server
 
-      let weatherData = await axios.get(url);
+  getWeatherData = async (location) => {
+    try {
+      // TODO: axios to hit my backend server - need to send it cityName, lat, lon
+      console.log(process.env.REACT_APP_SERVER)
+      let url = `${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.city}&lat=${location.lat}&lon=${location.lon}`;
+
+      console.log('weather url', url);
+
+      let weatherData = await axios.get(url)
 
       this.setState({
-        weatherData: weatherData.data,
-      
-      })
-   
+        weather: weatherData.data
+      });
+    } catch (error) {
+      this.setState({
+        error: true,
+        errorMessage: error.message
+      });
+    }
   }
-
-  render() {
+  
+  render(){
     return (
-      <>
-        <Weather 
-        weatherData={this.state.weatherData}/>
-
+      <div id= 'item'>
+      
         <Header />
-
-        <CityForm 
-        getCityData={this.getCityData} handleInput={this.handleInput}/>
-
+        <Weather
+        weatherData={this.state.weather} />
+        <CityForm getCityData={this.getCityData} handleInput={this.handleInput}/>
         <Main />
 
         {
@@ -103,10 +113,11 @@ class App extends React.Component {
             </div>
         }
         <Footer />
-      </>
+      </div>
+  
     )
   }
 
-}
+  }
 
 export default App;

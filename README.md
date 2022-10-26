@@ -2,14 +2,16 @@
 
 Name of feature: city Explorer
 
-Estimate of time needed to complete: 8 hrs
+Estimate of time needed to complete: 9 hrs
 
 Start time: 4pm
 
 Finish time: 2:45pm
 
 Actual time needed to complete: 8hrs
-[wrc](/wrrc.jpg)
+
+[wrc](/wrrc1.jpg)
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
