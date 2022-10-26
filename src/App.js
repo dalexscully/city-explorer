@@ -3,9 +3,9 @@ import Header from './Components/Header';
 import Main from './Components/Main';
 import Footer from './Components/Footer';
 import CityForm from './Components/CityForm';
+import Weather from './Components/Weather';
 import './App.css'
 import axios from 'axios';
-
 
 
 class App extends React.Component {
@@ -18,7 +18,8 @@ class App extends React.Component {
       lat: '',
       lon: '',
       errorMessage: '',
-      img: ''
+      img: '',
+      weatherData: [],
     }
   }
 
@@ -60,21 +61,40 @@ class App extends React.Component {
 
   }
 
+  getWeatherData = async () => {
+    
+    // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER AND GET PET DATA
+    
+      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.cityName}`;
+
+      let weatherData = await axios.get(url);
+
+      this.setState({
+        weatherData: weatherData.data,
+      
+      })
+   
+  }
+
   render() {
     return (
       <>
-      
+        <Weather 
+        weatherData={this.state.weatherData}/>
+
         <Header />
-        <CityForm getCityData={this.getCityData} handleInput={this.handleInput}/>
+
+        <CityForm 
+        getCityData={this.getCityData} handleInput={this.handleInput}/>
+
         <Main />
-        <Footer />
-      
+
         {
           this.state.error
-            ?
-            <p>{this.state.errorMessage}</p>
-            :
-            <div>
+          ?
+          <p>{this.state.errorMessage}</p>
+          :
+          <div>
               <p id='title'>{this.state.cityData.display_name}</p>
               <p id='lat'>{this.state.cityData.lat}</p>
               <p id='lon'> {this.state.cityData.lon}</p>
@@ -82,6 +102,7 @@ class App extends React.Component {
               <img id="map" alt='location Map'src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
             </div>
         }
+        <Footer />
       </>
     )
   }
