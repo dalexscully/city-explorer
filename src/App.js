@@ -87,22 +87,8 @@ class App extends React.Component {
         errorMessage: error.message
       });
     }
-
-  getWeatherData = async () => {
-    
-    // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER AND GET PET DATA
-    
-      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.cityName}`;
-
-      let weatherData = await axios.get(url);
-
-      this.setState({
-        weatherData: weatherData.data,
-      
-      })
-   
   }
-
+  
   render(){
     return (
       <div id= 'item'>
@@ -128,10 +114,10 @@ class App extends React.Component {
         }
         <Footer />
       </div>
-      </>
+  
     )
   }
 
-}
+  }
 
 export default App;
