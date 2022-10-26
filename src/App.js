@@ -8,7 +8,6 @@ import './App.css'
 import axios from 'axios';
 
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +20,8 @@ class App extends React.Component {
       errorMessage: '',
       weather: [],
       img: ''
+
+      
     }
   }
 
@@ -86,6 +87,20 @@ class App extends React.Component {
         errorMessage: error.message
       });
     }
+
+  getWeatherData = async () => {
+    
+    // TODO: BUILD OUT FUNCTIONALITY TO CALL MY SERVER AND GET PET DATA
+    
+      let url = `${process.env.REACT_APP_SERVER}/weather?searchQuery=${this.state.cityName}`;
+
+      let weatherData = await axios.get(url);
+
+      this.setState({
+        weatherData: weatherData.data,
+      
+      })
+   
   }
 
   render() {
@@ -97,7 +112,7 @@ class App extends React.Component {
         weatherData={this.state.weather} />
         <CityForm getCityData={this.getCityData} handleInput={this.handleInput}/>
         <Main />
-      
+
         {
           this.state.error
           ?
@@ -113,6 +128,7 @@ class App extends React.Component {
         }
         <Footer />
       </div>
+      </>
     )
   }
 

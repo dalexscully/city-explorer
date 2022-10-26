@@ -4,6 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 class Weather extends React.Component {
   render(){
+
     return (
       <div>
       <h1>Forecast Data</h1>
