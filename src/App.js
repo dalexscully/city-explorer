@@ -4,6 +4,7 @@ import Main from './Components/Main';
 import Footer from './Components/Footer';
 import CityForm from './Components/CityForm';
 import Weather from './Components/Weather';
+import Movies from './Components/Movies';
 import './App.css'
 import axios from 'axios';
 
@@ -19,12 +20,10 @@ class App extends React.Component {
       lon: '',
       errorMessage: '',
       weather: [],
+      movies: [],
       img: ''
-
-      
     }
   }
-
 
   handleInput = (e) => {
     e.preventDefault();
@@ -38,23 +37,20 @@ class App extends React.Component {
     console.log(this.state.city);
 
     try {
-
       let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&q=${this.state.city}&format=json`
 
       let cityData = await axios.get(url);
       let showData = cityData.data[0];
       // console.log(cityData.datals[0]);
+
       this.setState({
         cityData: showData,
         error: false,
         lon: cityData.data[0].lon,
         lat: cityData.data[0].lat,
-      });
-      this.getWeatherData(showData);
+      }, this.makeApiCall);
 
       console.log(this.state)
-
-
 
     } catch (error) {
       console.log(error);
@@ -63,15 +59,19 @@ class App extends React.Component {
         errorMessage: error.message,
       })
     }
+    
+  }
+  makeApiCall = async () => { 
+    
+    await this.getWeatherData(this.state.cityData);
+    await this.getMovies();
 
   }
-
   getWeatherData = async (location) => {
     try {
-      
       console.log(process.env.REACT_APP_SERVER)
       let url = `${process.env.REACT_APP_SERVER}/weather?lat=${location.lat}&lon=${location.lon}`;
-      
+
       console.log(url);
       console.log('weather url', url);
 
@@ -88,37 +88,60 @@ class App extends React.Component {
     }
   }
 
+  getMovies = async () => {
+    try {
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?city_name=${this.state.city}`)
+      this.setState({
+        movies: movieData.data
 
-  
-  render(){
+      })
+    } catch (error) {
+      this.setState({
+        error: false,
+        errorMessage: error.message
+      })
+    }
+  }
+
+  render() {
+    console.log(this.state)
     return (
-      <div id= 'item'>
-      
+      <div id='item'>
+
         <Header />
-        <Weather
-        weatherData={this.state.weather} />
-        <CityForm getCityData={this.getCityData} handleInput={this.handleInput}/>
+
         <Main />
+
+        <Weather
+          weatherData={this.state.weather} />
+
+        <CityForm getCityData={this.getCityData} handleInput={this.handleInput} />
+
+        {this.state.movies.length &&
+          <Movies
+            movieData={this.state.movies} />
+
+        }
 
         {
           this.state.error
-          ?
-          <p>{this.state.errorMessage}</p>
-          :
-          <div>
+            ?
+            <p>{this.state.errorMessage}</p>
+            :
+            <div>
               <p id='title'>{this.state.cityData.display_name}</p>
               <p id='lat'>{this.state.cityData.lat}</p>
               <p id='lon'> {this.state.cityData.lon}</p>
-              {this.state.cityData.display_name && 
-              <img id="map" alt='location Map'src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
+              {this.state.cityData.display_name &&
+                <img id="map" alt='location Map' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
             </div>
         }
         <Footer />
       </div>
-  
+
     )
   }
 
-  }
+}
 
 export default App;
