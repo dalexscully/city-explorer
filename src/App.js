@@ -66,17 +66,16 @@ class App extends React.Component {
 
   }
 
-  // TODO: get weather dataf from our own backend server
-
   getWeatherData = async (location) => {
     try {
-      // TODO: axios to hit my backend server - need to send it cityName, lat, lon
+      
       console.log(process.env.REACT_APP_SERVER)
-      let url = `${process.env.REACT_APP_SERVER}/weather?cityName=${this.state.city}&lat=${location.lat}&lon=${location.lon}`;
-
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${location.lat}&lon=${location.lon}`;
+      
+      console.log(url);
       console.log('weather url', url);
 
-      let weatherData = await axios.get(url)
+      let weatherData = await axios.get(url);
 
       this.setState({
         weather: weatherData.data
