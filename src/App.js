@@ -63,14 +63,14 @@ class App extends React.Component {
   }
   makeApiCall = async () => { 
     
-    await this.getWeatherData(this.state.cityData);
+    await this.getWeatherData();
     await this.getMovies();
 
   }
-  getWeatherData = async (location) => {
+  getWeatherData = async () => {
     try {
       console.log(process.env.REACT_APP_SERVER)
-      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${location.lat}&lon=${location.lon}`;
+      let url = `${process.env.REACT_APP_SERVER}/weather?lat=${this.state.lat}&lon=${this.state.lon}`;
 
       console.log(url);
       console.log('weather url', url);
@@ -109,26 +109,18 @@ class App extends React.Component {
       <div id='item'>
 
         <Header />
-
+        
         <Main />
-
-        <Weather
-          weatherData={this.state.weather} />
 
         <CityForm getCityData={this.getCityData} handleInput={this.handleInput} />
 
-        {this.state.movies.length &&
-          <Movies
-            movieData={this.state.movies} />
-
-        }
 
         {
           this.state.error
-            ?
-            <p>{this.state.errorMessage}</p>
-            :
-            <div>
+          ?
+          <p>{this.state.errorMessage}</p>
+          :
+          <div>
               <p id='title'>{this.state.cityData.display_name}</p>
               <p id='lat'>{this.state.cityData.lat}</p>
               <p id='lon'> {this.state.cityData.lon}</p>
@@ -136,6 +128,14 @@ class App extends React.Component {
                 <img id="map" alt='location Map' src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_CITYEXPLORER_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=10`} />}
             </div>
         }
+
+        {this.state.movies.length &&
+          <Movies
+          movieData={this.state.movies} /> 
+        }
+
+        <Weather
+          weatherData={this.state.weather} />
         <Footer />
       </div>
 
