@@ -1,5 +1,7 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import WeatherDay from './WeatherDay';
+
 
 
 class Weather extends React.Component {
