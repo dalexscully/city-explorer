@@ -16,12 +16,12 @@ class Movies extends React.Component {
 
   render() {
     let movieDataParsed = this.props.movieData.map((movie) => (
-      <Col className='m-4'>
-        <Card className='movieCard'>
+      <Col className='m-5'>
+        <Card className='h-100 movieCard'>
           <Card.Img variant="top" src={`https://tmdb.org/t/p/w300${movie.img}`} />
           <Card.Body>
-            <Card.Title>{movie.title}</Card.Title>
-            <Card.Text>
+            <Card.Title id= 'title'>{movie.title}</Card.Title>
+            <Card.Text id= 'body'>
               {movie.overview}
             </Card.Text>
         </Card.Body>
@@ -31,7 +31,7 @@ class Movies extends React.Component {
 
     return (
       <Container id='contain' fluid>
-        <Row id='row' xs={1} sm={1} md={2} lg={4} className='g-4'>
+        <Row id='row' xs={1} sm={1} md={2} lg={4}>
           {movieDataParsed}
         </Row>
       </Container>
