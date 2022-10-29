@@ -1,5 +1,7 @@
 body {
   background-color: rgb(170, 187, 187);
+  background-image: url(../public/img/nasa-Q1p7bh3SHj8-unsplash.jpg);
+
   
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -13,27 +15,3 @@ code {
     monospace;
 }
 
-#item {
-  color: white;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-size: 600px 500px;
-  background-image: url(../public/img/nasa-Q1p7bh3SHj8-unsplash.jpg);
-}
-
-h1 {
-  color: white;
-  text-align: center;  
-}
-
-#map {
-  margin: center;
-  border-style: none;
-  border-radius: 20px;
-}
-
-#footer {
-  align-items: center;
-  bottom: 0;
-  color: black;
-}

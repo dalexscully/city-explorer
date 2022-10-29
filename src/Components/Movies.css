@@ -1,9 +1,9 @@
 .movieCard{
   margin: auto;
-  padding: 5px;
-  width: 300px;
-  height: 700px;
-  flex: 33.33%
+  padding: 3%;
+  width: 420px;
+  height: 900%;
+  flex: 39.33%
 }
 #title{
   color: black;
