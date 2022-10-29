@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+#item {
+  color: white;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 600px 500px;
+}
+h1 {
+  color: white;
+  text-align: center; 
+  margin: 30px;
+}
+
+#map {
+  margin: right;
+  padding: 25%;
+  height: auto;
+  border-style:none;
+  border-radius: 20px;
+}
+
+#footer {
+  text-align: center;
+  bottom: 0;
+  color: white;
+}
+#form {
+  text-align: center;
+}
