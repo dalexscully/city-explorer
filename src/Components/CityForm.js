@@ -14,7 +14,7 @@ class CityForm extends React.Component {
     return (
       <div>
         <Form id="form" onSubmit={this.props.getCityData}>
-          <label > Locate a City
+          <label > Locate A City
             <input type="text" onInput={this.props.handleInput} />
             <Button type="submit">Explore!</Button>
           </label>
