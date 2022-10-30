@@ -46,21 +46,27 @@ h1 {
   color: white;
   text-align: center; 
   margin: 30px;
+  padding: 10px
 }
 
 #map {
   margin: right;
-  padding: 25%;
+  padding: 29%;
   height: auto;
   border-style:none;
-  border-radius: 20px;
+  border-radius: 20%;
 }
 
 #footer {
+  position:fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   text-align: center;
   bottom: 0;
   color: white;
 }
 #form {
   text-align: center;
+  padding: 1.5%;
 }
