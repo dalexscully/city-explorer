@@ -50,11 +50,11 @@ h1 {
 }
 
 #map {
-  margin: right;
-  padding: 29%;
-  height: auto;
-  border-style:none;
-  border-radius: 20%;
+  text-align: center;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 400px;
 }
 
 #footer {
